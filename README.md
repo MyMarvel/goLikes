@@ -3,7 +3,7 @@
 
 I use Redis for NoSQL database, gin for web framework, gomock for mocking framework.
 
-## Where to look at?
+## Anything interesting?
 - Check swagger docs to see the public API of the project (run http://localhost:8080/swagger/index.html after the installation)
 - [routes/routes.go] - handlers for all routes
 - [controllers/database.go] - Redis database implementation
