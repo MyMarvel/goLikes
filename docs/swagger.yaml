@@ -1,0 +1,92 @@
+basePath: /api/v1.0
+definitions:
+  routes.doLikeParams:
+    properties:
+      currentAccount:
+        type: string
+      targetAccount:
+        type: string
+    required:
+    - currentAccount
+    - targetAccount
+    type: object
+  routes.getLikeCountParams:
+    properties:
+      targetAccount:
+        type: string
+    required:
+    - targetAccount
+    type: object
+host: localhost:8080
+info:
+  contact:
+    email: nikita.petrov.programmer@gmail.com
+    name: Petrov Nikita
+    url: https://github.com/MyMarvel
+  description: Allows users to add likes to other users.
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: Likes API for Accounts
+  version: "1.0"
+paths:
+  /likes/doLike:
+    post:
+      consumes:
+      - application/json
+      description: Increments likes counter for a person in case the user didn't like
+        them yet
+      parameters:
+      - description: 'Params:<ul><li><i>TargetAccount</i>: The account name we like.</li><li><i>CurrentAccount</i>:
+          Our account (the person who likes)</li></ul>'
+        in: body
+        name: Body
+        required: true
+        schema:
+          $ref: '#/definitions/routes.doLikeParams'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 'Example: <code>{''likes'': likesCount}</code>'
+          schema:
+            type: string
+        "208":
+          description: 'Example: <code>{''warning'': ''Already liked''}</code>'
+          schema:
+            type: string
+        "400":
+          description: 'Example: <code>{''error'': ''Error description''}</code>'
+          schema:
+            type: string
+      summary: Adds a like to an account
+      tags:
+      - Likes
+  /likes/getLikeCount:
+    post:
+      consumes:
+      - application/json
+      description: Returns amount of likes collected by a certain account
+      parameters:
+      - description: 'Params:<ul><li><i>TargetAccount</i>: The account name we like</li><ul>'
+        in: body
+        name: Body
+        required: true
+        schema:
+          $ref: '#/definitions/routes.getLikeCountParams'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 'Example: <code>{''likes'': likesCount}</code>'
+          schema:
+            type: string
+        "400":
+          description: 'Example: <code>{''error'': ''Error description''}</code>'
+          schema:
+            type: string
+      summary: Get likes for an account
+      tags:
+      - Likes
+swagger: "2.0"
