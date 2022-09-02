@@ -7,7 +7,7 @@ I use Redis for NoSQL database, gin for web framework, gomock for mocking framew
 - Check swagger docs to see the public API of the project (run http://localhost:8080/swagger/index.html after the installation)
 - [routes/routes.go] - handlers for all routes
 - [controllers/database.go] - Redis database implementation
-- [controllers/account_test.go] - an example of a unit test
+- [tests/account_test.go] - an example of a unit test
 - Don't look at ./mocks subfolder - it is generated automatically, as well as ./docs
 
 ## Installation
@@ -53,8 +53,8 @@ To fetch amount of likes for a user without incrementing it, use http://localhos
 ## Troubleshooting
 I am still new in Go world, so any improvements or suggestions are appreciated. Just submit a new issue [here][submitIssue].
 
-[submitIssue]: <https://github.com/gin-gonic/gin/issues/new>
-[routes/routes.go]: <https://github.com/gin-gonic/gin/blob/master/.golangci.yml>
-[controllers/database.go]: <https://github.com/gin-gonic/gin/blob/master/.golangci.yml>
-[controllers/account_test.go]: <https://github.com/gin-gonic/gin/blob/master/.golangci.yml>
-[settings.go]: <https://github.com/joemccann/dillinger>
+[submitIssue]: <https://github.com/MyMarvel/goLikes/issues/new>
+[routes/routes.go]: <https://github.com/MyMarvel/goLikes/blob/main/routes/routes.go>
+[controllers/database.go]: <https://github.com/MyMarvel/goLikes/blob/main/controllers/database.go>
+[tests/account_test.go]: <https://github.com/MyMarvel/goLikes/blob/main/tests/account_test.go>
+[settings.go]: <https://github.com/MyMarvel/goLikes/blob/main/settings.go>
