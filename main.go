@@ -4,7 +4,11 @@ import (
 	"likes_handler/controllers"
 	_ "likes_handler/docs"
 	"likes_handler/routes"
+	"likes_handler/settings"
 
+	"log"
+
+	config "github.com/spf13/viper"
 	swaggerfiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
 )
@@ -25,15 +29,22 @@ import (
 // @BasePath  /api/v1.0
 
 func main() {
-	s := NewSettings()
+	if err := settings.Init(); err != nil {
+		log.Fatalf("%s", err.Error())
+	}
 	factory := controllers.NewFactory()
 	controllers.InitControllersFactory(factory)
-	controllers.InitDatabase(s.DbHost, s.DbPort, s.DbPass)
-	routes.InitControllersFactory(factory)
-	r := routes.GenerateRoutes()
-	swagger := r.Group("/swagger")
-	{
-		swagger.GET("/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))
+	controllers.InitDatabase(config.GetString("database.host"), config.GetString("database.port"), config.GetString("database.pass"))
+	if config.GetBool("services.webAPI") {
+		routes.InitControllersFactory(factory)
+		r := routes.GenerateRoutes()
+		swagger := r.Group("/swagger")
+		{
+			swagger.GET("/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))
+		}
+		r.Run(":" + config.GetString("webAPI.port"))
 	}
-	r.Run(":" + s.WebPort)
+	if config.GetBool("services.gRPC") {
+
+	}
 }

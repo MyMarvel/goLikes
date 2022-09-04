@@ -1,0 +1,10 @@
+database:
+  type: redis
+  host: localhost
+  port: 6379
+  pass:
+webAPI:
+  port: 8080
+services:
+  gRPC: true
+  webAPI: true

@@ -64,13 +64,13 @@ Increments likes counter for a person in case the user didn't like them yet
 
 ##### Parameters
 
-[ <sub><sup>| Name | Located in | Description | Required | Schema |
+[ <sub>| Name | Located in | Description | Required | Schema |
 | ---- | ---------- | ----------- | -------- | ---- |
-| Body | body | Params:<ul><li><i>TargetAccount</i>: The account name we like.</li><li><i>CurrentAccount</i>: Our account (the person who likes)</li></ul> | Yes | [routes.doLikeParams](#routes.doLikeParams) |]
+| Body | body | Params:<ul><li><i>TargetAccount</i>: The account name we like.</li><li><i>CurrentAccount</i>: Our account (the person who likes)</li></ul> | Yes | routes.doLikeParams |]
 
 ##### Responses
 
-[ <sub><sup>| Code | Description | Schema |
+[ <sub>| Code | Description | Schema |
 | ---- | ----------- | ------ |
 | 200 | Example: <code>{'likes': likesCount}</code> | string |
 | 208 | Example: <code>{'warning': 'Already liked'}</code> | string |
@@ -89,13 +89,13 @@ Returns amount of likes collected by a certain account
 
 ##### Parameters
 
-[ <sub><sup>| Name | Located in | Description | Required | Schema |
+[ <sub>| Name | Located in | Description | Required | Schema |
 | ---- | ---------- | ----------- | -------- | ---- |
 | Body | body | Params:<ul><li><i>TargetAccount</i>: The account name we like</li><ul> | Yes | [routes.getLikeCountParams](#routes.getLikeCountParams) |]
 
 ##### Responses
 
-[ <sub><sup>| Code | Description | Schema |
+[ <sub>| Code | Description | Schema |
 | ---- | ----------- | ------ |
 | 200 | Example: <code>{'likes': likesCount}</code> | string |
 | 400 | Example: <code>{'error': 'Error description'}</code> | string |]
@@ -105,14 +105,14 @@ Returns amount of likes collected by a certain account
 
 #### routes.doLikeParams
 
-[ <sub><sup>| Name | Type | Description | Required |
+[ <sub>| Name | Type | Description | Required |
 | ---- | ---- | ----------- | -------- |
 | currentAccount | string |  | Yes |
 | targetAccount | string |  | Yes |]
 
 #### routes.getLikeCountParams
 
-[ <sub><sup>| Name | Type | Description | Required |
+[ <sub>| Name | Type | Description | Required |
 | ---- | ---- | ----------- | -------- |
 | targetAccount | string |  | Yes |]
 
