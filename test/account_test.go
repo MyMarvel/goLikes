@@ -1,4 +1,4 @@
-package tests
+package test
 
 import (
 	"testing"
@@ -6,8 +6,8 @@ import (
 	"github.com/go-playground/assert/v2"
 	"github.com/golang/mock/gomock"
 
-	"likes_handler/controllers"
-	"likes_handler/mocks/mock_controllers"
+	"likes_handler/internal/controllers"
+	"likes_handler/internal/mocks/mock_controllers"
 )
 
 func TestIncrementLikeCounter(t *testing.T) {

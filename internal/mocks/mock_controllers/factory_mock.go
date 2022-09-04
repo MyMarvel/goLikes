@@ -5,7 +5,7 @@
 package mock_controllers
 
 import (
-	controllers "likes_handler/controllers"
+	controllers "likes_handler/internal/controllers"
 	reflect "reflect"
 
 	gomock "github.com/golang/mock/gomock"

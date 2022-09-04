@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"net/http"
 
-	"likes_handler/controllers"
+	"likes_handler/internal/controllers"
 
 	"github.com/gin-gonic/gin"
 )

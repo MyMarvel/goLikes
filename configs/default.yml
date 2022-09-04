@@ -7,4 +7,4 @@ webAPI:
   port: 8080
 services:
   gRPC: true
-  webAPI: true
+  webAPI: false

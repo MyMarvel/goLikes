@@ -1,10 +1,10 @@
-package tests
+package test
 
 import (
 	"bytes"
 	"encoding/json"
-	"likes_handler/mocks/mock_controllers"
-	"likes_handler/routes"
+	"likes_handler/internal/mocks/mock_controllers"
+	"likes_handler/web/app/routes"
 	"net/http"
 	"net/http/httptest"
 	"testing"

@@ -19,7 +19,11 @@ cd goLikes
 ```
 Change services section in [settings/default.yml] file in case you want to disable the http part of the project and leave only the gRPC one. You can change ports for redis or a web server here too. Then execute:
 ```sh
-go run .
+make run
+```
+or
+```sh
+go run cmd/main.go
 ```
 
 ## How to use
@@ -52,8 +56,6 @@ To fetch amount of likes for a user without incrementing it, use http://localhos
 ```
 
 ## API Documentation
-
----
 
 ### /likes/doLike
 

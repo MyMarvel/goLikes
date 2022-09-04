@@ -1,10 +1,10 @@
 package main
 
 import (
-	"likes_handler/controllers"
+	"likes_handler/configs"
 	_ "likes_handler/docs"
-	"likes_handler/routes"
-	"likes_handler/settings"
+	"likes_handler/internal/controllers"
+	"likes_handler/web/app/routes"
 
 	"log"
 
@@ -29,7 +29,7 @@ import (
 // @BasePath  /api/v1.0
 
 func main() {
-	if err := settings.Init(); err != nil {
+	if err := configs.Init(); err != nil {
 		log.Fatalf("%s", err.Error())
 	}
 	factory := controllers.NewFactory()
