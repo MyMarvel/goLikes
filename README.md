@@ -7,6 +7,7 @@ I use Redis for NoSQL database, gin for web framework, gomock for mocking framew
 - [routes/routes.go] - handlers for all routes
 - [controllers/database.go] - Redis database implementation
 - [tests/account_test.go] - an example of a unit test
+- [settings/default.yml] - a config file
 - Don't look at ./mocks subfolder - it is generated automatically, as well as ./docs
 - You can check swagger docs to see the public API of the project (run http://localhost:8080/swagger/index.html after the installation)
 
@@ -16,7 +17,7 @@ You should install and run a local redis server first (preferred port: 6379). Th
 git clone git@github.com:MyMarvel/goLikes.git
 cd goLikes
 ```
-Change [settings.go] in case you want to disable the http part of the project and leave only the gRPC one. You can change ports for redis or a web server here too. Then execute:
+Change services section in [settings/default.yml] file in case you want to disable the http part of the project and leave only the gRPC one. You can change ports for redis or a web server here too. Then execute:
 ```sh
 go run .
 ```
@@ -105,6 +106,8 @@ Returns amount of likes collected by a certain account
 | 200 | Example: <code>{'likes': likesCount}</code> | string |
 | 400 | Example: <code>{'error': 'Error description'}</code> | string |
 
+---
+
 ### Models
 
 
@@ -128,4 +131,4 @@ I am still new in Go world, so any improvements or suggestions are appreciated. 
 [routes/routes.go]: <https://github.com/MyMarvel/goLikes/blob/main/routes/routes.go>
 [controllers/database.go]: <https://github.com/MyMarvel/goLikes/blob/main/controllers/database.go>
 [tests/account_test.go]: <https://github.com/MyMarvel/goLikes/blob/main/tests/account_test.go>
-[settings.go]: <https://github.com/MyMarvel/goLikes/blob/main/settings.go>
+[settings/default.yml]: <https://github.com/MyMarvel/goLikes/blob/main/settings/default.yml>
