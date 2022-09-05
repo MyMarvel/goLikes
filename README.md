@@ -134,7 +134,7 @@ I am still new in Go world, so any improvements or suggestions are appreciated. 
 [submitIssue]: <https://github.com/MyMarvel/goLikes/issues/new>
 [cmd/main.go]: <https://github.com/MyMarvel/goLikes/blob/main/cmd/main.go>
 [internal/gRPCServer/gRPCServer.go]: <https://github.com/MyMarvel/goLikes/blob/main/internal/gRPCServer/gRPCServer.go>
-[web/app/routes/routes.go]: <https://github.com/MyMarvel/goLikes/blob/main/routes/routes.go>
-[internal/controllers/database.go]: <https://github.com/MyMarvel/goLikes/blob/main/controllers/database.go>
-[test/account_test.go]: <https://github.com/MyMarvel/goLikes/blob/main/tests/account_test.go>
+[web/app/routes/routes.go]: <https://github.com/MyMarvel/goLikes/blob/main/web/app/routes//routes.go>
+[internal/controllers/database.go]: <https://github.com/MyMarvel/goLikes/blob/main/internal/controllers/database.go>
+[test/account_test.go]: <https://github.com/MyMarvel/goLikes/blob/main/test/account_test.go>
 [settings/default.yml]: <https://github.com/MyMarvel/goLikes/blob/main/settings/default.yml>

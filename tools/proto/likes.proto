@@ -19,6 +19,5 @@ message GetLikeCountParams {
 }
     
 message GetLikeCountReply {
-    string likes = 1;
-    string error = 2;
+    int64 likes = 1;
 }

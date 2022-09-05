@@ -54,6 +54,7 @@ func main() {
 	}
 	if config.GetBool("gRPC.enabled") {
 		log.Print("Starting gRPC server...")
+		gRPCServer.InitControllersFactory(factory)
 		s := grpc.NewServer()
 		srv := &gRPCServer.GRPCServer{}
 		proto.RegisterLikesServer(s, srv)
