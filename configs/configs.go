@@ -5,7 +5,7 @@ import (
 )
 
 func Init() error {
-	viper.AddConfigPath("./configs")
+	viper.AddConfigPath("../configs")
 	viper.SetConfigName("default")
 
 	return viper.ReadInConfig()

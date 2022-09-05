@@ -33,8 +33,8 @@ func TestIncrementLikeCounter(t *testing.T) {
 func initTestDatabase(dbMock controllers.IDatabase, ctrl *gomock.Controller) {
 	factoryMock := mock_controllers.NewMockIFactory(ctrl)
 	factoryMock.EXPECT().
-		NewIDatabase(gomock.Eq("host:port"), gomock.Eq("pass")).
+		NewIDatabase(gomock.Eq("host:8080"), gomock.Eq("pass")).
 		Return(dbMock)
 	controllers.InitControllersFactory(factoryMock)
-	controllers.InitDatabase("host", "port", "pass")
+	controllers.InitDatabase("host", 8080, "pass")
 }

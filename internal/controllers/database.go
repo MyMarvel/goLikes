@@ -31,8 +31,8 @@ func NewDatabase(addr string, pass string) database {
 		})}
 }
 
-func InitDatabase(dbHost string, dbPort string, pass string) {
-	db = controllersFactory.NewIDatabase(dbHost+":"+dbPort, pass)
+func InitDatabase(dbHost string, dbPort int, pass string) {
+	db = controllersFactory.NewIDatabase(fmt.Sprintf("%s:%d", dbHost, dbPort), pass)
 }
 
 func (d database) SelectAmountLikesForAccount(targetAcc string) (int, error) {

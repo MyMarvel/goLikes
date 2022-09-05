@@ -1,16 +1,23 @@
 package main
 
 import (
+	"fmt"
 	"likes_handler/configs"
 	_ "likes_handler/docs"
 	"likes_handler/internal/controllers"
+	"likes_handler/internal/gRPCServer"
+	"likes_handler/tools/proto"
 	"likes_handler/web/app/routes"
+	"net"
+	"os"
 
-	"log"
+	"github.com/rs/zerolog"
+	"github.com/rs/zerolog/log"
 
 	config "github.com/spf13/viper"
 	swaggerfiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
+	"google.golang.org/grpc"
 )
 
 // @title           Likes API for Accounts
@@ -29,13 +36,14 @@ import (
 // @BasePath  /api/v1.0
 
 func main() {
+	log.Logger = log.Output(zerolog.ConsoleWriter{Out: os.Stderr})
 	if err := configs.Init(); err != nil {
-		log.Fatalf("%s", err.Error())
+		log.Fatal().Err(err)
 	}
 	factory := controllers.NewFactory()
 	controllers.InitControllersFactory(factory)
-	controllers.InitDatabase(config.GetString("database.host"), config.GetString("database.port"), config.GetString("database.pass"))
-	if config.GetBool("services.webAPI") {
+	controllers.InitDatabase(config.GetString("database.host"), config.GetInt("database.port"), config.GetString("database.pass"))
+	if config.GetBool("webAPI.enabled") {
 		routes.InitControllersFactory(factory)
 		r := routes.GenerateRoutes()
 		swagger := r.Group("/swagger")
@@ -44,7 +52,20 @@ func main() {
 		}
 		r.Run(":" + config.GetString("webAPI.port"))
 	}
-	if config.GetBool("services.gRPC") {
+	if config.GetBool("gRPC.enabled") {
+		log.Print("Starting gRPC server...")
+		s := grpc.NewServer()
+		srv := &gRPCServer.GRPCServer{}
+		proto.RegisterLikesServer(s, srv)
 
+		l, err := net.Listen("tcp", fmt.Sprintf("%s:%d", config.GetString("gRPC.host"), config.GetInt("gRPC.port")))
+		if err != nil {
+			log.Fatal().Err(err)
+		}
+
+		log.Printf("gRPC server started on port %d", config.GetInt("gRPC.port"))
+		if err := s.Serve(l); err != nil {
+			log.Fatal().Err(err)
+		}
 	}
 }
