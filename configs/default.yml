@@ -4,7 +4,7 @@ database:
   port: 6379
   pass:
 webAPI:
-  enabled: false
+  enabled: true
   port: 8080
 gRPC:
   enabled: true

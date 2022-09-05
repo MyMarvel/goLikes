@@ -10,6 +10,7 @@ import (
 	"likes_handler/web/app/routes"
 	"net"
 	"os"
+	"sync"
 
 	"github.com/rs/zerolog"
 	"github.com/rs/zerolog/log"
@@ -43,30 +44,42 @@ func main() {
 	factory := controllers.NewFactory()
 	controllers.InitControllersFactory(factory)
 	controllers.InitDatabase(config.GetString("database.host"), config.GetInt("database.port"), config.GetString("database.pass"))
+
+	var wg sync.WaitGroup
+
 	if config.GetBool("webAPI.enabled") {
-		routes.InitControllersFactory(factory)
-		r := routes.GenerateRoutes()
-		swagger := r.Group("/swagger")
-		{
-			swagger.GET("/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))
-		}
-		r.Run(":" + config.GetString("webAPI.port"))
+		wg.Add(1)
+		go func() {
+			routes.InitControllersFactory(factory)
+			r := routes.GenerateRoutes()
+			swagger := r.Group("/swagger")
+			{
+				swagger.GET("/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))
+			}
+			r.Run(":" + config.GetString("webAPI.port"))
+		}()
 	}
+
 	if config.GetBool("gRPC.enabled") {
-		log.Print("Starting gRPC server...")
-		gRPCServer.InitControllersFactory(factory)
-		s := grpc.NewServer()
-		srv := &gRPCServer.GRPCServer{}
-		proto.RegisterLikesServer(s, srv)
+		wg.Add(1)
+		go func() {
+			log.Print("Starting gRPC server...")
+			gRPCServer.InitControllersFactory(factory)
+			s := grpc.NewServer()
+			srv := &gRPCServer.GRPCServer{}
+			proto.RegisterLikesServer(s, srv)
 
-		l, err := net.Listen("tcp", fmt.Sprintf("%s:%d", config.GetString("gRPC.host"), config.GetInt("gRPC.port")))
-		if err != nil {
-			log.Fatal().Err(err)
-		}
+			l, err := net.Listen("tcp", fmt.Sprintf("%s:%d", config.GetString("gRPC.host"), config.GetInt("gRPC.port")))
+			if err != nil {
+				log.Fatal().Err(err)
+			}
 
-		log.Printf("gRPC server started on port %d", config.GetInt("gRPC.port"))
-		if err := s.Serve(l); err != nil {
-			log.Fatal().Err(err)
-		}
+			log.Printf("gRPC server started on port %d", config.GetInt("gRPC.port"))
+			if err := s.Serve(l); err != nil {
+				log.Fatal().Err(err)
+			}
+		}()
 	}
+
+	wg.Wait()
 }
