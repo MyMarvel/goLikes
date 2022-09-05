@@ -21,7 +21,7 @@ type GRPCServer struct {
 func (s *GRPCServer) DoLike(ctx context.Context, in *proto.DoLikeParams) (*proto.GetLikeCountReply, error) {
 	var acc controllers.IAccount = controllersFactory.NewIAccount(in.CurrentAccount)
 	isAccountAlreadyLikes, err := acc.IsAccountLikes(in.TargetAccount)
-	if err != nil {
+	if err == nil {
 		if !isAccountAlreadyLikes {
 			likesCount, err := acc.IncrementLikeCounter(in.TargetAccount)
 			return &proto.GetLikeCountReply{Likes: int64(likesCount)}, err

@@ -1,5 +1,7 @@
 package controllers
 
+import "errors"
+
 type account struct {
 	Name string
 }
@@ -15,6 +17,9 @@ func NewAccount(name string) account {
 }
 
 func (acc account) IncrementLikeCounter(targetAccount string) (int, error) {
+	if targetAccount == acc.Name {
+		return 0, errors.New("You cannot add a like to yourself")
+	}
 	err := db.AddLikeToAccount(targetAccount, acc.Name)
 	likesCount, _ := db.SelectAmountLikesForAccount(targetAccount)
 	return likesCount, err

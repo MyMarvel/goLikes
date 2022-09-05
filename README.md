@@ -10,7 +10,7 @@ I use Redis for NoSQL database, gin for web framework, gRPC as an alternative wa
 - [internal/controllers/database.go] - Redis database implementation
 - [test/account_test.go] - an example of a unit test
 - [configs/default.yml] - a config file
-- Don't look at ./mocks subfolder - it is generated automatically, as well as ./docs
+- Don't look at ./internal/mocks subfolder - it is generated automatically, as well as ./docs
 - You can check swagger docs to see the public API of the project (run http://localhost:8080/swagger/index.html after the installation)
 
 ## Installation

@@ -46,6 +46,6 @@ func (d database) IsAccountLikes(currentAcc string, targetAcc string) (bool, err
 }
 
 func (d database) AddLikeToAccount(targetAcc string, currentAcc string) error {
-	res := d.client.SAdd(ctx, fmt.Sprintf(LIKES_TABLE, targetAcc), currentAcc, 0)
+	res := d.client.SAdd(ctx, fmt.Sprintf(LIKES_TABLE, targetAcc), currentAcc)
 	return res.Err()
 }
