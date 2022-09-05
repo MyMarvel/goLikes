@@ -1,12 +1,14 @@
 # My pet project on Golang
 #### Allows users to add likes to other users.
 
-I use Redis for NoSQL database, gin for web framework, gomock for mocking framework.
+I use Redis for NoSQL database, gin for web framework, gRPC as an alternative way to interact with this project, gomock for mocking framework.
 
 ## Anything interesting?
-- [routes/routes.go] - handlers for all routes
-- [controllers/database.go] - Redis database implementation
-- [tests/account_test.go] - an example of a unit test
+- [cmd/main.go] - main file
+- [internal/gRPCServer/gRPCServer.go] - handlers for all services
+- [web/app/routes/routes.go] - handlers for all routes
+- [internal/controllers/database.go] - Redis database implementation
+- [test/account_test.go] - an example of a unit test
 - [settings/default.yml] - a config file
 - Don't look at ./mocks subfolder - it is generated automatically, as well as ./docs
 - You can check swagger docs to see the public API of the project (run http://localhost:8080/swagger/index.html after the installation)
@@ -130,7 +132,9 @@ Returns amount of likes collected by a certain account
 I am still new in Go world, so any improvements or suggestions are appreciated. Just submit a new issue [here][submitIssue].
 
 [submitIssue]: <https://github.com/MyMarvel/goLikes/issues/new>
-[routes/routes.go]: <https://github.com/MyMarvel/goLikes/blob/main/routes/routes.go>
-[controllers/database.go]: <https://github.com/MyMarvel/goLikes/blob/main/controllers/database.go>
-[tests/account_test.go]: <https://github.com/MyMarvel/goLikes/blob/main/tests/account_test.go>
+[cmd/main.go]: <https://github.com/MyMarvel/goLikes/blob/main/cmd/main.go>
+[internal/gRPCServer/gRPCServer.go]: <https://github.com/MyMarvel/goLikes/blob/main/internal/gRPCServer/gRPCServer.go>
+[web/app/routes/routes.go]: <https://github.com/MyMarvel/goLikes/blob/main/routes/routes.go>
+[internal/controllers/database.go]: <https://github.com/MyMarvel/goLikes/blob/main/controllers/database.go>
+[test/account_test.go]: <https://github.com/MyMarvel/goLikes/blob/main/tests/account_test.go>
 [settings/default.yml]: <https://github.com/MyMarvel/goLikes/blob/main/settings/default.yml>
